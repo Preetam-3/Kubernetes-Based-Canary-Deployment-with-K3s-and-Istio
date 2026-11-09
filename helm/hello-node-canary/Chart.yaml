@@ -1,0 +1,6 @@
+apiVersion: v2
+name: hello-node-canary
+description: Canary deployment of hello-node (v1/v2) on K3s with Istio traffic splitting
+type: application
+version: 0.1.0
+appVersion: "1.0"

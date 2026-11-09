@@ -1,0 +1,21 @@
+# Default = 80/20 canary. Override weights with -f values-*.yaml
+app:
+  name: hello-node
+  port: 80
+  targetPort: 3000
+  imagePullPolicy: IfNotPresent
+
+versions:
+  - name: v1
+    image: hello-node:v1
+    replicas: 1
+  - name: v2
+    image: hello-node:v2
+    replicas: 1
+
+traffic:
+  v1: 80
+  v2: 20
+
+gateway:
+  name: gateway

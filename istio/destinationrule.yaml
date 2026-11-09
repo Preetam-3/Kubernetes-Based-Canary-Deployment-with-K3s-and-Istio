@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: hello-node
+  namespace: demo
+spec:
+  host: hello-node
+  subsets:
+    - name: hello-node-v1
+      labels:
+        app: hello-node
+        version: v1
+      trafficPolicy:
+        loadBalancer:
+          simple: ROUND_ROBIN
+    - name: hello-node-v2
+      labels:
+        app: hello-node
+        version: v2
+      trafficPolicy:
+        loadBalancer:
+          simple: ROUND_ROBIN

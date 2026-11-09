@@ -1,0 +1,26 @@
+{{- range .Values.versions }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $.Values.app.name }}-{{ .name }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  replicas: {{ .replicas }}
+  selector:
+    matchLabels:
+      app: {{ $.Values.app.name }}
+      version: {{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $.Values.app.name }}
+        version: {{ .name }}
+    spec:
+      containers:
+        - name: {{ $.Values.app.name }}
+          image: {{ .image }}
+          imagePullPolicy: {{ $.Values.app.imagePullPolicy }}
+          ports:
+            - containerPort: {{ $.Values.app.targetPort }}
+{{- end }}
